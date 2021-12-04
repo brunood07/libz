@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 
-import { ICreateBookDTO } from "../../../dtos/ICreateBookDTO";
-import { IBooksRepository } from "../../../repositories/IBooksRepository";
+import { ICreateBookDTO } from "@modules/books/dtos/ICreateBookDTO";
+import { IBooksRepository } from "@modules/books/repositories/IBooksRepository";
 import { Book } from "../entities/Book";
 
 class BooksRepository implements IBooksRepository {
@@ -17,7 +17,9 @@ class BooksRepository implements IBooksRepository {
     category,
     photo_url,
     number_of_pages,
-    id,
+    publishing_company,
+    isbn,
+    release_year
   }: ICreateBookDTO): Promise<Book> {
     const book = this.repository.create({
       book_name,
@@ -25,7 +27,9 @@ class BooksRepository implements IBooksRepository {
       category,
       photo_url,
       number_of_pages,
-      id,
+      publishing_company,
+      isbn,
+      release_year
     });
 
     await this.repository.save(book);
@@ -33,16 +37,22 @@ class BooksRepository implements IBooksRepository {
     return book;
   }
 
-  async findById(id?: string): Promise<Book> {
+  async findById(id: string): Promise<Book> {
     const book = await this.repository.findOne(id);
 
     return book;
   }
 
-  async findByBookName(book_name: string): Promise<Book> {
-    const book = await this.repository.findOne(book_name);
+  async findByISBN(isbn: string): Promise<Book> {
+    const book = await this.repository.findOne({ isbn });
 
     return book;
+  }
+
+  async listAllBooks(): Promise<Book[]> {
+    const allBooks = await this.repository.find();
+
+    return allBooks;
   }
 }
 

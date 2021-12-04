@@ -1,13 +1,14 @@
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
-import "express-async-error";
+import "express-async-errors";
 
 import "../../container";
 import { router } from "./routes";
-import createConnection from "../typeorm/index";
-import { AppError } from "../../errors/AppError";
+import createConnection from "@shared/infra/typeorm";
+import { AppError } from "@shared/errors/AppError";
 
 createConnection();
+
 const app = express();
 
 app.use(express.json());

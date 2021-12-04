@@ -31,6 +31,18 @@ export class CreateBooks1638539253013 implements MigrationInterface {
             name: "number_of_pages",
             type: "varchar"
           },
+          {
+            name: "isbn",
+            type: "varchar"
+          },
+          {
+            name: "release_year",
+            type: "numeric",
+          },
+          {
+            name: "publishing_company",
+            type: "varchar"
+          }
         ],
       })
     );

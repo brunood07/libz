@@ -10,6 +10,9 @@ class CreateBookController {
       category,
       photo_url,
       number_of_pages,
+      publishing_company,
+      isbn,
+      release_year
     } = req.body;
 
     const createBookUseCase = container.resolve(CreateBookUseCase);
@@ -20,6 +23,9 @@ class CreateBookController {
       category,
       photo_url,
       number_of_pages,
+      publishing_company,
+      isbn,
+      release_year
     });
 
     return res.status(201).json(book);

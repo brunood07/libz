@@ -21,6 +21,15 @@ class Book {
   @Column()
   number_of_pages: string;
 
+  @Column()
+  publishing_company: string;
+
+  @Column({ unique: true })
+  isbn: string;
+
+  @Column()
+  release_year: number;
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
