@@ -49,10 +49,26 @@ class BooksRepository implements IBooksRepository {
     return book;
   }
 
-  async listAllBooks(): Promise<Book[]> {
-    const allBooks = await this.repository.find();
+  async listAllAvailableBooks(category?: string, isbn?: string, book_name?: string): Promise<Book[]> {
+    const booksQuery = await this.repository
+      .createQueryBuilder("c")
+      .where("available = :available", { available: true });
 
-    return allBooks;
+    if (category) {
+      booksQuery.andWhere("category = :category", { category });
+    }
+
+    if (isbn) {
+      booksQuery.andWhere("isbn = :isbn", { isbn });
+    }
+
+    if (book_name) {
+      booksQuery.andWhere("book_name = :book_name", { book_name });
+    }
+
+    const allAvailableBooks = await booksQuery.getMany();
+
+    return allAvailableBooks;
   }
 }
 

@@ -32,6 +32,11 @@ export class CreateBooks1638539253013 implements MigrationInterface {
             type: "varchar"
           },
           {
+            name: "available",
+            type: "boolean",
+            default: true
+          },
+          {
             name: "isbn",
             type: "varchar"
           },

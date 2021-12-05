@@ -24,6 +24,9 @@ class Book {
   @Column()
   publishing_company: string;
 
+  @Column()
+  available: boolean;
+
   @Column({ unique: true })
   isbn: string;
 
@@ -33,6 +36,7 @@ class Book {
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
+      this.available = true;
     }
   }
 }

@@ -42,10 +42,20 @@ class BooksRepositoryInMemory implements IBooksRepository {
     return this.books.find(book => book.isbn === isbn);
   }
 
-  async listAllBooks(): Promise<Book[]> {
-    const allBooks = this.books;
+  async listAllAvailableBooks(category?: string, book_name?: string, isbn?: string): Promise<Book[]> {
+    const all = this.books.filter((book) => {
+      if (
+        book.available === true ||
+        ((category && book.category === category) ||
+          (book_name && book.book_name === book_name) ||
+          (isbn && book.isbn === isbn))
+      ) {
+        return book;
+      }
+      return null;
+    });
 
-    return allBooks;
+    return all;
   }
 
 }

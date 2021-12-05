@@ -1,14 +1,14 @@
 import { Router } from "express";
 
 import { CreateBookController } from "@modules/books/useCases/createBook/CreateBookController";
-import { ListBooksController } from "@modules/books/useCases/listBooks/ListBooksController";
+import { ListAvailableBooksController } from "@modules/books/useCases/listAvailableBooks/ListAvailableBooksController";
 
 const booksRoutes = Router();
 
 const createBookController = new CreateBookController();
-const listBooksController = new ListBooksController();
+const listAvailableBooksController = new ListAvailableBooksController();
 
 booksRoutes.post("/", createBookController.handle);
-booksRoutes.get("/", listBooksController.handle);
+booksRoutes.get("/available", listAvailableBooksController.handle);
 
 export { booksRoutes };
