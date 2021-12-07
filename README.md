@@ -2,7 +2,7 @@
 
 Projeto criado com a intenção de colocar em prática o que foi aprendido durante as aulas do ignite da Rocketseat.
 </br>
-A aplicação Libz é um sistema de biblioteca pública, onde o usuário pode realizar o aluguel de um livro por vez por 7 dias e caso haja atraso deve ser paga uma multa.
+A aplicação Libz é um sistema de biblioteca pública, onde o usuário pode realizar o aluguel de um livro por vez a cada 7 dias e caso haja atraso deve ser pago uma multa.
 
 ## Tecnologias utilizadas
 
