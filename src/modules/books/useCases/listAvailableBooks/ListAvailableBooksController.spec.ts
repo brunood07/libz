@@ -1,6 +1,7 @@
-import { app } from "@shared/infra/http/app";
 import request from "supertest";
 import { Connection, createConnection } from "typeorm"
+
+import { app } from "@shared/infra/http/app";
 
 let connection: Connection
 

@@ -9,7 +9,7 @@ const booksRoutes = Router();
 const createBookController = new CreateBookController();
 const listAvailableBooksController = new ListAvailableBooksController();
 
-booksRoutes.post("/", ensureAuthenticated, createBookController.handle);
-booksRoutes.get("/available", ensureAuthenticated, listAvailableBooksController.handle);
+booksRoutes.post("/", createBookController.handle);
+booksRoutes.get("/available", listAvailableBooksController.handle);
 
 export { booksRoutes };

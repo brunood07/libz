@@ -3,7 +3,6 @@ import { Book } from "@modules/books/infra/typeorm/entities/Book";
 import { IBooksRepository } from "../IBooksRepository";
 
 class BooksRepositoryInMemory implements IBooksRepository {
-
   books: Book[] = [];
 
   async create({
@@ -58,6 +57,10 @@ class BooksRepositoryInMemory implements IBooksRepository {
     return all;
   }
 
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    const findIndex = this.books.findIndex(book => book.id === id);
+    this.books[findIndex].available = available;
+  }
 }
 
 export { BooksRepositoryInMemory };

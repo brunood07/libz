@@ -4,7 +4,6 @@ import { container } from "tsyringe";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 class AuthenticateUserController {
-
   async handle(req: Request, res: Response, next: NextFunction): Promise<Response> {
     try {
       const { password, email } = req.body;

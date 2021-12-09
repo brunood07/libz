@@ -6,6 +6,7 @@ interface IBooksRepository {
   findById(id: string): Promise<Book>;
   findByISBN(isbn: string): Promise<Book>;
   listAllAvailableBooks(category?: string, isbn?: string, book_name?: string): Promise<Book[]>;
+  updateAvailable(id: string, available: boolean): Promise<void>;
 }
 
 export { IBooksRepository };
