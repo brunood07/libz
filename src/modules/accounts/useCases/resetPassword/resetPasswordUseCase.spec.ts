@@ -43,7 +43,8 @@ describe("Reset password", () => {
       password: "passwordtest",
       address: "test address",
       telephone: "1199887766997",
-      id_number: "89878764618"
+      id_number: "89878764618",
+      id: uuidV4()
     };
 
     const deletePassword = jest.spyOn(usersTokensRepository, "deleteById");
@@ -73,7 +74,7 @@ describe("Reset password", () => {
     await createUserUseCase.execute(user);
 
     const invalidToken = sign({}, auth.secret_refresh_token, {
-      subject: uuidV4(),
+      subject: String(uuidV4()),
       expiresIn: auth.expires_in_refresh_token
     });
 

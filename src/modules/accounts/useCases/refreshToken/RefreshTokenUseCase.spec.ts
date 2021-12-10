@@ -46,6 +46,7 @@ describe("Refresh token", () => {
       password: user.password
     });
 
+    console.log(refresh_token)
     const result = await refreshTokenUseCase.execute(refresh_token);
 
     expect(result).toHaveProperty("token");
