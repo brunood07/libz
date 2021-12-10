@@ -4,10 +4,10 @@ import { IBooksRepository } from "@modules/books/repositories/IBooksRepository";
 import { IRentsRepository } from "@modules/rents/repository/IRentsRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
+import { Rent } from "@modules/rents/infra/typeorm/entities/Rent";
 
 interface IRequest {
   id: string;
-  return_date?: Date;
 }
 
 @injectable()
@@ -23,7 +23,7 @@ class DevolutionRentUseCase {
     private dateProvider: IDateProvider
   ) { }
 
-  async execute({ id, return_date }: IRequest) {
+  async execute({ id }: IRequest): Promise<Rent> {
     const rent = await this.rentsRepository.findById(id);
 
     if (!rent) {
@@ -47,7 +47,7 @@ class DevolutionRentUseCase {
 
     const delay = this.dateProvider.compareInDays(
       dateNow,
-      return_date || rent.expected_return_date,
+      rent.expected_return_date,
     );
 
     let total = 0;

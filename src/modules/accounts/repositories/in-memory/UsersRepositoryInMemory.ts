@@ -11,7 +11,8 @@ class UsersRepositoryInMemory implements IUsersRepository {
     password,
     address,
     telephone,
-    id_number
+    id_number,
+    id
   }: ICreateUserDTO): Promise<void> {
     const user = new User();
 
@@ -21,7 +22,8 @@ class UsersRepositoryInMemory implements IUsersRepository {
       password,
       address,
       telephone,
-      id_number
+      id_number,
+      id
     });
 
     this.users.push(user);
