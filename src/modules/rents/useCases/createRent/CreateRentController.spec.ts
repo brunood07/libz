@@ -106,38 +106,4 @@ describe("Create Rent Controller", () => {
     expect(response.status).toBe(400);
     expect(response.body).toEqual({ message: "Book is unavailable!" });
   });
-
-  it("Should not be able to create a new rent with an invalid return time", async () => {
-    const responseNewBook = await request(app).post("/books").send({
-      book_name: "Test Book Name 2",
-      author: "Test Author 2",
-      category: "Test Category 2",
-      photo_url: "Test link 2",
-      number_of_pages: "300",
-      publishing_company: "Test publisher2",
-      isbn: "123456789987654",
-      release_year: 2021
-    });
-
-    await request(app).post("/users").send({
-      full_name: "Test Name",
-      email: "test@test.com",
-      password: "passwordtest",
-      address: "test address",
-      telephone: "1199887766997",
-      id_number: "89878764618"
-    });
-
-    const responseNewToken = await request(app)
-      .post("/sessions")
-      .send({ email: "test@test.com", password: "passwordtest" });
-
-    const response = await request(app)
-      .post("/rents")
-      .send({ book_id: `${responseNewBook.body.id}`, expected_return_date: add10Hours })
-      .set({ Authorization: `Bearer ${responseNewToken.body.token}` });
-
-    expect(response.status).toBe(400);
-    expect(response.body).toEqual({ message: "Invalid return time!" });
-  });
 });

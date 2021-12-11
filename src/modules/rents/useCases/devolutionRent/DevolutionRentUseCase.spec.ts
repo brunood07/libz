@@ -65,7 +65,7 @@ describe("Devolve a rent", () => {
     const rent = await rentsRepositoryInMemory.create({
       user_id: "123",
       book_id: book.id,
-      expected_return_date: dayjs().add(8, "days").toDate()
+      expected_return_date: dayjs().add(9, "days").toDate()
     });
 
     const devolution = await devolutionRentUseCase.execute({
@@ -74,7 +74,7 @@ describe("Devolve a rent", () => {
 
     expect(devolution).toHaveProperty("total");
     expect(devolution).toHaveProperty("end_date");
-    expect(devolution.total).toBe(24);
+    expect(devolution.total).toBe(6);
     expect(book.available).toBe(true);
   });
 });

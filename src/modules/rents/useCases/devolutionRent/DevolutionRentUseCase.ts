@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { inject, injectable } from "tsyringe";
 
 import { IBooksRepository } from "@modules/books/repositories/IBooksRepository";
@@ -30,8 +31,6 @@ class DevolutionRentUseCase {
       throw new AppError("Rent does not exists!");
     }
 
-    const minimumRentDays = 7;
-
     const book = await this.booksRepository.findById(rent.book_id);
 
     const dateNow = this.dateProvider.dateNow();
@@ -41,10 +40,6 @@ class DevolutionRentUseCase {
       this.dateProvider.dateNow()
     );
 
-    if (rentTime <= 0) {
-      rentTime = minimumRentDays;
-    }
-
     const delay = this.dateProvider.compareInDays(
       dateNow,
       rent.expected_return_date,
@@ -52,8 +47,8 @@ class DevolutionRentUseCase {
 
     let total = 0;
 
-    if (delay > 0) {
-      const calculate_fine_amount = delay * 3;
+    if (delay > 7) {
+      const calculate_fine_amount = (delay - 7) * 3;
       total = calculate_fine_amount;
     }
 
