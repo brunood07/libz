@@ -12,7 +12,7 @@ class CreateUserController {
       password,
       address,
       telephone,
-      id_number
+      id_number,
     } = req.body;
 
     const createUserUseCase = container.resolve(CreateUserUseCase);
@@ -23,7 +23,7 @@ class CreateUserController {
       password,
       address,
       telephone,
-      id_number
+      id_number,
     });
 
     return res.status(201).send(user);

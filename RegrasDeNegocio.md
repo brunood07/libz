@@ -8,7 +8,7 @@
 **RN**
 - Não deve ser possível cadastrar um livro com ISBN já existente.
 - O livro deve ser cadastrado, por padrão, como disponível.
-- O usuário responsável pelo cadastro de um livro deve ser um administrador.
+- O usuário responsável pelo cadastro de um livro deve ser um usuário autenticado.
 
 ## Listagem de Livros
 
@@ -27,7 +27,7 @@
 - Deve ser possível cadastrar um aluguel.
 
 **RN**
-- O aluguel deve ter duração mínima de 7 dias.
+- O aluguel deve ter duração de 7 dias.
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuário.
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo livro.
 - O usuário deve estar logado na aplicação para fazer um aluguel.

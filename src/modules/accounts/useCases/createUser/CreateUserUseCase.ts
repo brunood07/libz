@@ -18,7 +18,7 @@ class CreateUserUseCase {
     password,
     address,
     telephone,
-    id_number
+    id_number,
   }: ICreateUserDTO) {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
@@ -34,7 +34,7 @@ class CreateUserUseCase {
       password: passwordHash,
       address,
       telephone,
-      id_number
+      id_number,
     });
 
     return user;
