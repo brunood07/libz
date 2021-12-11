@@ -1,0 +1,411 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Libz documentation",
+    "description": "This is an API for Libz",
+    "version": "1.0.0",
+    "contact": {
+      "email": "brunood07@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Users management"
+    },
+    {
+      "name": "Books",
+      "description": "Books management"
+    },
+    {
+      "name": "Rents",
+      "description": "Rents management"
+    },
+    {
+      "name": "Sessions",
+      "description": "Sessions management"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "full_name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  },
+                  "id_number": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "full_name": "John Doe",
+                  "email": "jdoe@email.com",
+                  "password": "jdoepassword",
+                  "address": "Street B, 468",
+                  "telephone": "897981321",
+                  "id_number": "98498498"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists!"
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Return user profile",
+        "description": "Return information of user profile",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "apllication/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "full_name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "type": "string"
+                      },
+                      "id_number": {
+                        "type": "string"
+                      },
+                      "telephone": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books": {
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Create a new book",
+        "description": "Create a new available book",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "apllication/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "book_name": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "photo_url": {
+                    "type": "string"
+                  },
+                  "number_of_pages": {
+                    "type": "string"
+                  },
+                  "publishing_company": {
+                    "type": "string"
+                  },
+                  "isbn": {
+                    "type": "string"
+                  },
+                  "release_year": {
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "book_name": "Lord of The Rings",
+                  "author": "J.R.R. Tolkien",
+                  "category": "Fantasy",
+                  "photo_url": "example_url",
+                  "number_of_pages": "500",
+                  "publishing_company": "HarperCollins",
+                  "isbn": "984Adas98984ewD8EA",
+                  "release_year": "2019"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Book already exists!"
+          }
+        }
+      }
+    },
+    "/books/available": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "List available books",
+        "description": "List all available books",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "conent": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "book_name": {
+                        "type": "string"
+                      },
+                      "author": {
+                        "type": "string"
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "photo_url": {
+                        "type": "string"
+                      },
+                      "number_of_pages": {
+                        "type": "string"
+                      },
+                      "publishing_company": {
+                        "type": "string"
+                      },
+                      "isbn": {
+                        "type": "string"
+                      },
+                      "release_year": {
+                        "type": "number"
+                      },
+                      "available": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "summary": "Authentication User",
+        "description": "Authenticate a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or password is incorrect!"
+          }
+        }
+      }
+    },
+    "/rents": {
+      "tags": [
+        "Rents"
+      ],
+      "summary": "Create a rent",
+      "description": "Create a new rent",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "book_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Created"
+        },
+        "400": {
+          "description": "Book is unavailable!"
+        },
+        "400": {
+          "description": "There is a rent in progress for this user!"
+        }
+      }
+    },
+    "/rents/devolution/:id": {
+      "post": {
+        "tags": [
+          "Rents"
+        ],
+        "summary": "Devolve a book",
+        "description": "Devolve a rented book",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/rents/user": {
+      "get": {
+        "tags": [
+          "Rents"
+        ],
+        "summary": "List user rents",
+        "description": "List user all rents",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "apllication/json": {
+                "schema": {
+                  "type": "array",
+                  "items": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "book_id": {
+                      "type": "string"
+                    },
+                    "user_id": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "type": "string"
+                    },
+                    "end_date": {
+                      "type": "string"
+                    },
+                    "expected_return_date": {
+                      "type": "string"
+                    },
+                    "total": {
+                      "type": "number"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    },
+                    "book": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
